@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '2022油价变化'
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['Brent', 'WTI']
+  },
+  grid: {
+    left: '%',
+    right: '5%',
+    bottom: '10',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月']
+  },
+  yAxis: {
+   min:70,
+   axisLabel: {
+      formatter: '{value} 美元/桶'
+    }
+  },
+  series: [
+    {
+      name: 'Brent',
+      type: 'line',
+      data: [85.57, 94.1, 112.46, 105.92, 111.96,117.5, 105.12,97.74,90.57,93.6,90.85,81.34]
+    },
+    {
+      name: 'WTI',
+      type: 'line',
+      data: [82.98,91.63,108.26,101.64,109.26,114.34,99.38,91.48,83.8,86.96,84.4,76.52]
+    },
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
